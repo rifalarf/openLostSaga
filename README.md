@@ -7,12 +7,15 @@ An open source, browser-playable, multiplayer reimagining of the classic
 - **Browser-first** — no install; WebGL rendering via Three.js
 - **Multiplayer** — real-time matches with an authoritative server
 
-> ⚠️ **Legal note:** This project is a *from-scratch* reimplementation.
-> It contains no code, art, audio, or other assets from Lost Saga.
-> Original mechanically-inspired gameplay values are reference data only.
-> We do not affiliate with, or endorse copying from, any official
-> Lost Saga service (KR/TW/CN/Origin). Commercial use of this project is
-> allowed under the MIT license, but must not include any original game assets.
+> ⚠️ **Project scope:** openLostSaga is a **direct port** of the publicly
+> circulated 2014 Lost Saga source tree, translated to TypeScript/WebGL,
+> and bundled with the original game assets. The translated code and the
+> original assets remain copyrighted by their original rights holders
+> (IO Entertainment / successors); the MIT license in this repo applies
+> to the port tooling, build system, and new code written by contributors.
+> This project is not affiliated with any official Lost Saga service
+> (KR/TW/CN/Origin) and is intended for the lost-game preservation /
+> community play.
 
 ## Stack
 

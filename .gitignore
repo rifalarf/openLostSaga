@@ -25,11 +25,6 @@ npm-debug.log*
 .DS_Store
 *.swp
 
-# Local analysis reference (never commit)
-LS_extracted/
-LS.rar
-unrar.log
-
 # Coverage / caches
 coverage/
 .eslintcache

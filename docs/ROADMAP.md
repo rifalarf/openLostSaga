@@ -6,20 +6,24 @@ deployment before M1 and M2 are done.
 
 ## 0. Project context
 
-**Goal:** recreate *Lost Saga* (2.5D beat-'em-up PvP) as an open source,
-browser-playable, multiplayer game.
+**Goal:** port *Lost Saga* (2.5D beat-'em-up PvP) directly to the browser:
+translate the original C++ gameplay code to TypeScript/WebGL and ship the
+original game assets with it, as a playable multiplayer web game.
 
-**Local reference materials (never commit these to the repo):**
+**Local reference materials:**
 `/home/anoe/agent-do/app-reverse/LS_extracted/` — 16 GB extraction of the
 publicly circulated 2014 Lost Saga C++/DirectX9 source tree + DB dumps.
+This is the *translation source* for the project; original assets will be
+ported from it into the repo's asset pipeline.
 
-⚠️ **Legal rules (HARD):**
-- No Lost Saga source, assets, textures, or models may enter this repo.
-- Allowed: **reading** mechanics from the original source (damage numbers,
-  combo timings, state machines), then **reimplementing them cleanly in TS**.
-- Character assets: create our own, or use open-source sets
-  (Kenney, Quaternius, Sketchfab CC-BY).
-- Code license: MIT. Self-made assets: CC-BY.
+**Direct-translation approach (project decision):**
+- Translate original client/server C++ code into TypeScript, module by
+  module (`ioBaseChar` → `packages/core/io-base-char`, etc.). Preserve file
+  correspondence so translators can diff against the original C++.
+- Ship original assets (`.skl`/`.msh`/`.ani` meshes, textures, sounds)
+  via the asset pipeline, converted to glTF/web-friendly formats.
+- Attribution: original code & assets © IO Entertainment; port/tooling
+  code MIT.
 
 **Key reference paths inside LS_extracted:**
 
@@ -143,9 +147,14 @@ Extract the actual numbers from the reference first — never invent them.
 
 1. Finish ONE milestone completely (all checkboxes) before moving on.
 2. Small, focused commits with descriptive messages.
-3. **Never copy-paste C++ from Lost Saga.** Read → understand → rewrite in
-   TypeScript with a self-consistent architecture (ECS or OOP — pick one, stay consistent).
+3. **Direct translation is the norm.** Translate original C++ to TS while
+   preserving structure and names (`ioBaseChar` → `ioBaseChar.ts`), so
+   each translated file maps 1:1 to its C++ counterpart. Where the web
+   target forces deviation (DirectX → WebGL, IOCP → WebSocket), isolate
+   it behind an adapter layer and note it in `docs/decisions.md`.
 4. All gameplay numbers go in `packages/core/data/*.json` — data ≠ logic.
-5. `.gitignore` — from the first commit: exclude `LS_extracted/`, `LS.rar`, `unrar.log`.
+5. `.gitignore` — from the first commit: exclude `node_modules/`, build
+   output, env files. Translated code and ported assets ARE part of the
+   repo (that is the project decision).
 6. Record uncertain design decisions in `docs/decisions.md` — never choose silently.
 7. End every session with `pnpm lint && pnpm test && pnpm build` green.
